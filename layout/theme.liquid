@@ -38,6 +38,8 @@
 
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
 
+  {{ 'https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css' | stylesheet_tag }}
+
   <script>
     var theme = {
       strings: {
@@ -69,6 +71,7 @@
 
   <script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script>
   <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js' }}" defer="defer"></script>
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 
   {{ content_for_header }}

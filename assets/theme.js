@@ -2759,7 +2759,8 @@ theme.Cart = (function() {
     edit: '.js-edit-toggle',
     inputQty: '.cart__qty-input',
     thumbnails: '.cart__image',
-    item: '.cart__row'
+    item: '.cart__row',
+    datepicker: '.cart__datepicker'
   };
 
   var config = {
@@ -2773,6 +2774,7 @@ theme.Cart = (function() {
     this.$edit = $(selectors.edit, this.$container);
     this.$inputQuantities = $(selectors.inputQty, this.$container);
     this.$thumbnails = $(selectors.thumbnails, this.$container);
+    this.$datepicker = $(selectors.datepicker, this.$container);
 
     if (!this.cookiesEnabled()) {
       this.$container.addClass(config.cartNoCookies);
@@ -2783,6 +2785,11 @@ theme.Cart = (function() {
 
     this.$thumbnails.css('cursor', 'pointer');
     this.$thumbnails.on('click', this._handleThumbnailClick);
+
+    this.$datepicker.datepicker({
+        dateFormat: 'yy-mm-dd',
+        minDate: 0
+    });
   }
 
   Cart.prototype = _.assignIn({}, Cart.prototype, {

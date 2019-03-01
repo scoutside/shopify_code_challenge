@@ -165,6 +165,14 @@
               {%- endif -%}
             {%- endcapture -%}
             <div class="cart__shipping rte">{{ taxes_shipping_checkout }}</div>
+            {% assign date_three_days_from_now = "now" | date: "%s" | plus: 259200 | date: "%Y-%m-%d" %}
+            <div class="cart-attribute__field">
+                <label for="ship-date">Ship Date:</label>
+                <input id="ship-date" class="cart__datepicker" type="text" size="10"
+                  name="attributes[Ship Date]"
+                  value="{{ cart.attributes["Ship Date"] | default: date_three_days_from_now }}"
+                  placeholder="{{ date_three_days_from_now }}" />
+            </div>
             <div class="cart__submit-controls">
               <a href="collections/all" class="btn btn--secondary cart__continue small--hide cart__submit-control" >
                 {{ 'cart.general.continue_shopping' | t }}
