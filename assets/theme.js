@@ -2760,7 +2760,8 @@ theme.Cart = (function() {
     inputQty: '.cart__qty-input',
     thumbnails: '.cart__image',
     item: '.cart__row',
-    datepicker: '.cart__datepicker'
+    datepicker: '.cart__datepicker',
+    submit: 'cart__submit-control'
   };
 
   var config = {
@@ -2775,6 +2776,7 @@ theme.Cart = (function() {
     this.$inputQuantities = $(selectors.inputQty, this.$container);
     this.$thumbnails = $(selectors.thumbnails, this.$container);
     this.$datepicker = $(selectors.datepicker, this.$container);
+    this.$submit = $(selectors.submit, this.$container);
 
     if (!this.cookiesEnabled()) {
       this.$container.addClass(config.cartNoCookies);
@@ -2790,6 +2792,9 @@ theme.Cart = (function() {
         dateFormat: 'yy-mm-dd',
         minDate: 0
     });
+
+    this.$datepicker.on('blur', this._validateDate);
+    this.$submit.on('click', this._validateDate)
   }
 
   Cart.prototype = _.assignIn({}, Cart.prototype, {
@@ -2820,6 +2825,19 @@ theme.Cart = (function() {
       var url = $(evt.target).data('item-url');
 
       window.location.href = url;
+    },
+
+    _validateDate: function(evt) {
+        var dateEntered = $(this).val();
+        var dateDefault = $(this).attr('placeholder') || '';
+
+        if (dateEntered) {
+            if (!moment(dateEntered, ['YYYY-MM-DD']).isValid() || moment().diff(dateEntered, 'days') > 0) {
+                alert("Date must be in the future and formatted yyyy-mm-dd!");
+                $(this).val(dateDefault);
+                return false;
+            }
+        }
     },
 
     cookiesEnabled: function() {
