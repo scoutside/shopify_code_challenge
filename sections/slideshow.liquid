@@ -56,8 +56,7 @@
               <div class="slideshow__image"{% if block.settings.image %} style="background-image: url('{{ block.settings.image | img_url: '2048x' }}'); background-position: {{ block.settings.alignment }};"{% endif %}>
                 {% if block.settings.image == blank %}
                   <div class="placeholder-background">
-                    {% capture current %}{% cycle 1, 2 %}{% endcapture %}
-                    {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
                   </div>
                 {% endif %}
               </div>
@@ -104,7 +103,7 @@
       </div>
       <div class="slideshow__controls">
         {%- if section.blocks.size > 1 -%}
-          {%- assign arrows_width = section.blocks.size | times: 18 | plus: 95 -%}
+          {%- assign arrows_width = section.blocks.size | times: 18 | plus: 115 -%}
           <div class="slideshow__arrows"
                style="width: {{- arrows_width -}}px">
             <button class="slideshow__arrow slideshow__arrow-left" aria-label="{{ 'sections.slideshow.previous_slide' | t }}">{% include 'icon-chevron-left' %}</button>
@@ -117,7 +116,7 @@
                 <span class="icon__fallback-text">{{ 'sections.slideshow.pause_slideshow' | t }}</span>
               </span>
               <span class="slideshow__pause-rotate">
-                {% include 'icon-resume' %}
+                {% include 'icon-play' %}
                 <span class="icon__fallback-text">{{ 'sections.slideshow.rotate_slideshow' | t }}</span>
               </span>
             </button>
@@ -183,7 +182,10 @@
     "fr": "Diaporama",
     "it": "Presentazione",
     "ja": "スライドショー",
-    "pt-BR": "Apresentação de slides"
+    "nl": "Diavoorstelling",
+    "pt-BR": "Apresentação de slides",
+    "zh-CN": "幻灯片",
+    "zh-TW": "投影片輪播"
   },
   "class": "index-section index-section--flush index-section--slideshow",
   "max_blocks": 6,
@@ -198,7 +200,10 @@
         "fr": "Hauteur de la diapositive",
         "it": "Altezza slide",
         "ja": "スライドの高さ",
-        "pt-BR": "Altura do slide"
+        "nl": "Diahoogte",
+        "pt-BR": "Altura do slide",
+        "zh-CN": "幻灯片高度",
+        "zh-TW": "投影片高度"
       },
       "default": "adapt",
       "info": {
@@ -208,7 +213,10 @@
         "fr": "En savoir plus sur [les directives relatives au diaporama](https://help.shopify.com/en/manual/using-themes/themes-by-shopify/debut#slideshow-sections-specific)",
         "it": "Maggiori informazioni sulle [linee guida per le presentazioni](https://help.shopify.com/en/manual/using-themes/themes-by-shopify/debut#slideshow-sections-specific)",
         "ja": "[スライドショーのガイドラ](https://help.shopify.com/en/manual/using-themes/themes-by-shopify/debut#slideshow-sections-specific)インに関する詳細情報はこちら",
-        "pt-BR": "Saiba mais sobre as [diretrizes de apresentação de slides](https://help.shopify.com/en/manual/using-themes/themes-by-shopify/debut#slideshow-sections-specific)"
+        "nl": "Meer informatie over [richtlijnen diavoorstelling](https://help.shopify.com/en/manual/using-themes/themes-by-shopify/debut#slideshow-sections-specific)",
+        "pt-BR": "Saiba mais sobre as [diretrizes de apresentação de slides](https://help.shopify.com/en/manual/using-themes/themes-by-shopify/debut#slideshow-sections-specific)",
+        "zh-CN": "详细了解 [幻灯片指南](https://help.shopify.com/en/manual/using-themes/themes-by-shopify/debut#slideshow-sections-specific)",
+        "zh-TW": "深入瞭解 [投影片輪播準則](https://help.shopify.com/en/manual/using-themes/themes-by-shopify/debut#slideshow-sections-specific)。"
       },
       "options": [
         {
@@ -219,7 +227,10 @@
             "fr": "Adapter à la première image",
             "it": "Adatta alla prima immagine",
             "ja": "最初の画像に適応する",
-            "pt-BR": "Adaptar à primeira imagem"
+            "nl": "Aanpassen aan eerste afbeelding",
+            "pt-BR": "Adaptar à primeira imagem",
+            "zh-CN": "适应第一张图片",
+            "zh-TW": "配合第一張圖片"
           },
           "value": "adapt"
         },
@@ -231,7 +242,10 @@
             "fr": "Petite",
             "it": "Piccolo",
             "ja": "小",
-            "pt-BR": "Pequeno"
+            "nl": "Klein",
+            "pt-BR": "Pequeno",
+            "zh-CN": "小",
+            "zh-TW": "小型"
           },
           "value": "small"
         },
@@ -243,7 +257,10 @@
             "fr": "Moyenne",
             "it": "Medio",
             "ja": "中",
-            "pt-BR": "Médio"
+            "nl": "Gemiddeld",
+            "pt-BR": "Médio",
+            "zh-CN": "中等",
+            "zh-TW": "中等"
           },
           "value": "medium"
         },
@@ -255,7 +272,10 @@
             "fr": "Grande",
             "it": "Grande",
             "ja": "大",
-            "pt-BR": "Grande"
+            "nl": "Groot",
+            "pt-BR": "Grande",
+            "zh-CN": "大",
+            "zh-TW": "大型"
           },
           "value": "large"
         }
@@ -271,7 +291,10 @@
         "fr": "Taille du texte",
         "it": "Dimensione testo",
         "ja": "文字サイズ",
-        "pt-BR": "Tamanho do texto"
+        "nl": "Tekengrootte",
+        "pt-BR": "Tamanho do texto",
+        "zh-CN": "文本大小",
+        "zh-TW": "文字尺寸"
       },
       "default": "medium",
       "options": [
@@ -283,7 +306,10 @@
             "fr": "Moyenne",
             "it": "Medio",
             "ja": "中",
-            "pt-BR": "Médio"
+            "nl": "Gemiddeld",
+            "pt-BR": "Médio",
+            "zh-CN": "中等",
+            "zh-TW": "中等"
           },
           "value": "medium"
         },
@@ -295,7 +321,10 @@
             "fr": "Grande",
             "it": "Grande",
             "ja": "大",
-            "pt-BR": "Grande"
+            "nl": "Groot",
+            "pt-BR": "Grande",
+            "zh-CN": "大",
+            "zh-TW": "大型"
           },
           "value": "large"
         }
@@ -311,7 +340,10 @@
         "fr": "Alignement du texte",
         "it": "Allineamento del testo",
         "ja": "テキストアラインメント",
-        "pt-BR": "Alinhamento de texto"
+        "nl": "Tekstuitlijning",
+        "pt-BR": "Alinhamento de texto",
+        "zh-CN": "文本对齐方式",
+        "zh-TW": "文字對齊"
       },
       "default": "center center",
       "options": [
@@ -323,7 +355,10 @@
             "fr": "En haut à gauche",
             "it": "In alto a sinistra",
             "ja": "左上",
-            "pt-BR": "Superior esquerdo"
+            "nl": "Linksboven",
+            "pt-BR": "Superior esquerdo",
+            "zh-CN": "左上方",
+            "zh-TW": "左上角"
           },
           "value": "left top"
         },
@@ -335,7 +370,10 @@
             "fr": "En haut au centre",
             "it": "In alto al centro",
             "ja": "中央上",
-            "pt-BR": "Superior centro"
+            "nl": "Midden boven",
+            "pt-BR": "Superior centro",
+            "zh-CN": "顶部居中",
+            "zh-TW": "中央上方"
           },
           "value": "center top"
         },
@@ -347,7 +385,10 @@
             "fr": "En haut à droite",
             "it": "In alto a destra",
             "ja": "右上",
-            "pt-BR": "Superior direito"
+            "nl": "Rechtsboven",
+            "pt-BR": "Superior direito",
+            "zh-CN": "右上方",
+            "zh-TW": "右上角"
           },
           "value": "right top"
         },
@@ -359,7 +400,10 @@
             "fr": "Au milieu à gauche",
             "it": "Nel mezzo a sinistra",
             "ja": "中央左",
-            "pt-BR": "Meio esquerdo"
+            "nl": "Midden links",
+            "pt-BR": "Meio esquerdo",
+            "zh-CN": "中间居左",
+            "zh-TW": "中央左方"
           },
           "value": "left center"
         },
@@ -371,7 +415,10 @@
             "fr": "Centrée au milieu",
             "it": "In mezzo",
             "ja": "中央中",
-            "pt-BR": "Meio centro"
+            "nl": "Midden centrum",
+            "pt-BR": "Meio centro",
+            "zh-CN": "中间居中",
+            "zh-TW": "正中央"
           },
           "value": "center center"
         },
@@ -383,7 +430,10 @@
             "fr": "Au milieu à droite",
             "it": "Nel mezzo a destra",
             "ja": "中央右",
-            "pt-BR": "Meio direito"
+            "nl": "Midden rechts",
+            "pt-BR": "Meio direito",
+            "zh-CN": "中间居右",
+            "zh-TW": "中央右方"
           },
           "value": "right center"
         },
@@ -395,7 +445,10 @@
             "fr": "En bas à gauche",
             "it": "In basso a sinistra",
             "ja": "左下",
-            "pt-BR": "Inferior esquerdo"
+            "nl": "Linksonder",
+            "pt-BR": "Inferior esquerdo",
+            "zh-CN": "左下方",
+            "zh-TW": "左下角"
           },
           "value": "left bottom"
         },
@@ -407,7 +460,10 @@
             "fr": "En bas au centre",
             "it": "In basso al centro",
             "ja": "中央下",
-            "pt-BR": "Inferior centro"
+            "nl": "Midden onder",
+            "pt-BR": "Inferior centro",
+            "zh-CN": "底部居中",
+            "zh-TW": "中央下方"
           },
           "value": "center bottom"
         },
@@ -419,7 +475,10 @@
             "fr": "En bas à droite",
             "it": "In basso a destra",
             "ja": "右下",
-            "pt-BR": "Inferior direito"
+            "nl": "Rechtsonder",
+            "pt-BR": "Inferior direito",
+            "zh-CN": "右下方",
+            "zh-TW": "右下角"
           },
           "value": "right bottom"
         }
@@ -435,7 +494,10 @@
         "fr": "Afficher la superposition",
         "it": "Mostra sovrapposizione",
         "ja": "オーバーレイを表示する",
-        "pt-BR": "Exibir sobreposição"
+        "nl": "Overlay weergeven",
+        "pt-BR": "Exibir sobreposição",
+        "zh-CN": "显示叠加",
+        "zh-TW": "顯示疊加層"
       },
       "default": true
     },
@@ -449,7 +511,10 @@
         "fr": "Rotation automatique des diapositives",
         "it": "Ruota slide automaticamente",
         "ja": "スライドの自動切り替え",
-        "pt-BR": "Rodar os slides automaticamente"
+        "nl": "Dia's automatisch draaien",
+        "pt-BR": "Rodar os slides automaticamente",
+        "zh-CN": "自动旋转幻灯片",
+        "zh-TW": "自動旋轉投影片"
       },
       "default": false
     },
@@ -463,7 +528,10 @@
         "fr": "Changer de diapositive toutes les",
         "it": "Cambia slide ogni",
         "ja": "スライドを変更する間隔",
-        "pt-BR": "Mudar os slides a cada"
+        "nl": "Wijzig dia's elke",
+        "pt-BR": "Mudar os slides a cada",
+        "zh-CN": "幻灯片更改时间间隔",
+        "zh-TW": "每過以下時間即變更投影片"
       },
       "max": 9,
       "min": 3,
@@ -475,7 +543,10 @@
         "fr": " s",
         "it": " s",
         "ja": " s",
-        "pt-BR": " s"
+        "nl": " s",
+        "pt-BR": " s",
+        "zh-CN": " s",
+        "zh-TW": " s"
       },
       "default": 5
     }
@@ -490,7 +561,10 @@
         "fr": "Diapositive (image)",
         "it": "Slide immagine",
         "ja": "画像スライド",
-        "pt-BR": "Slide de imagem"
+        "nl": "Afbeelding dia",
+        "pt-BR": "Slide de imagem",
+        "zh-CN": "图片幻灯片",
+        "zh-TW": "圖片投影片"
       },
       "settings": [
         {
@@ -503,7 +577,10 @@
             "fr": "Image",
             "it": "Immagine",
             "ja": "画像",
-            "pt-BR": "Imagem"
+            "nl": "Afbeelding",
+            "pt-BR": "Imagem",
+            "zh-CN": "图片",
+            "zh-TW": "圖片"
           }
         },
         {
@@ -516,7 +593,10 @@
             "fr": "Position de l'image",
             "it": "Allineamento immagine",
             "ja": "画像アラインメント",
-            "pt-BR": "Alinhamento da imagem"
+            "nl": "Afbeeldingspositie",
+            "pt-BR": "Alinhamento da imagem",
+            "zh-CN": "图片位置",
+            "zh-TW": "圖片位置"
           },
           "default": "center center",
           "options": [
@@ -528,7 +608,10 @@
                 "fr": "En haut à gauche",
                 "it": "In alto a sinistra",
                 "ja": "左上",
-                "pt-BR": "Superior esquerdo"
+                "nl": "Linksboven",
+                "pt-BR": "Superior esquerdo",
+                "zh-CN": "左上方",
+                "zh-TW": "左上角"
               },
               "value": "left top"
             },
@@ -540,7 +623,10 @@
                 "fr": "En haut au centre",
                 "it": "In alto al centro",
                 "ja": "中央上",
-                "pt-BR": "Superior centro"
+                "nl": "Midden boven",
+                "pt-BR": "Superior centro",
+                "zh-CN": "顶部居中",
+                "zh-TW": "中央上方"
               },
               "value": "center top"
             },
@@ -552,7 +638,10 @@
                 "fr": "En haut à droite",
                 "it": "In alto a destra",
                 "ja": "右上",
-                "pt-BR": "Superior direito"
+                "nl": "Rechtsboven",
+                "pt-BR": "Superior direito",
+                "zh-CN": "右上方",
+                "zh-TW": "右上角"
               },
               "value": "right top"
             },
@@ -564,7 +653,10 @@
                 "fr": "Au milieu à gauche",
                 "it": "Nel mezzo a sinistra",
                 "ja": "中央左",
-                "pt-BR": "Meio esquerdo"
+                "nl": "Midden links",
+                "pt-BR": "Meio esquerdo",
+                "zh-CN": "中间居左",
+                "zh-TW": "中央左方"
               },
               "value": "left center"
             },
@@ -576,7 +668,10 @@
                 "fr": "Centrée au milieu",
                 "it": "In mezzo",
                 "ja": "中央中",
-                "pt-BR": "Meio centro"
+                "nl": "Midden centrum",
+                "pt-BR": "Meio centro",
+                "zh-CN": "中间居中",
+                "zh-TW": "正中央"
               },
               "value": "center center"
             },
@@ -588,7 +683,10 @@
                 "fr": "Au milieu à droite",
                 "it": "Nel mezzo a destra",
                 "ja": "中央右",
-                "pt-BR": "Meio direito"
+                "nl": "Midden rechts",
+                "pt-BR": "Meio direito",
+                "zh-CN": "中间居右",
+                "zh-TW": "中央右方"
               },
               "value": "right center"
             },
@@ -600,7 +698,10 @@
                 "fr": "En bas à gauche",
                 "it": "In basso a sinistra",
                 "ja": "左下",
-                "pt-BR": "Inferior esquerdo"
+                "nl": "Linksonder",
+                "pt-BR": "Inferior esquerdo",
+                "zh-CN": "左下方",
+                "zh-TW": "左下角"
               },
               "value": "left bottom"
             },
@@ -612,7 +713,10 @@
                 "fr": "En bas au centre",
                 "it": "In basso al centro",
                 "ja": "中央下",
-                "pt-BR": "Inferior centro"
+                "nl": "Midden onder",
+                "pt-BR": "Inferior centro",
+                "zh-CN": "底部居中",
+                "zh-TW": "中央下方"
               },
               "value": "center bottom"
             },
@@ -624,7 +728,10 @@
                 "fr": "En bas à droite",
                 "it": "In basso a destra",
                 "ja": "右下",
-                "pt-BR": "Inferior direito"
+                "nl": "Rechtsonder",
+                "pt-BR": "Inferior direito",
+                "zh-CN": "右下方",
+                "zh-TW": "右下角"
               },
               "value": "right bottom"
             }
@@ -640,7 +747,10 @@
             "fr": "En-tête",
             "it": "Heading",
             "ja": "見出し",
-            "pt-BR": "Título"
+            "nl": "Kop",
+            "pt-BR": "Título",
+            "zh-CN": "标题",
+            "zh-TW": "標題"
           },
           "default": {
             "de": "Foto-Slide",
@@ -649,7 +759,10 @@
             "fr": "Diapositive (image)",
             "it": "Slide immagine",
             "ja": "画像スライド",
-            "pt-BR": "Slide de imagem"
+            "nl": "Afbeelding dia",
+            "pt-BR": "Slide de imagem",
+            "zh-CN": "图片幻灯片",
+            "zh-TW": "圖片投影片"
           }
         },
         {
@@ -662,7 +775,10 @@
             "fr": "Sous-titre",
             "it": "Sottotitolo",
             "ja": "小見出し",
-            "pt-BR": "Subtítulo"
+            "nl": "Subkop",
+            "pt-BR": "Subtítulo",
+            "zh-CN": "副标题",
+            "zh-TW": "子標題"
           },
           "default": {
             "de": "Erzählen Sie Ihre Geschichte mit Fotos",
@@ -671,7 +787,10 @@
             "fr": "Racontez votre histoire avec des images",
             "it": "Racconta la storia del tuo brand con video e immagini",
             "ja": "あなたのブランドのストーリーをビデオや画像で伝える",
-            "pt-BR": "Conte a história da sua marca com vídeos e imagens"
+            "nl": "Vertel met afbeeldingen het verhaal van uw merk",
+            "pt-BR": "Conte a história da sua marca com vídeos e imagens",
+            "zh-CN": "通过图片讲述您的品牌故事",
+            "zh-TW": "用圖片講述您的品牌故事"
           }
         },
         {
@@ -684,7 +803,10 @@
             "fr": "Texte du bouton",
             "it": "Etichetta pulsante",
             "ja": "ボタンラベル",
-            "pt-BR": "Etiqueta do botão"
+            "nl": "Knoplabel",
+            "pt-BR": "Etiqueta do botão",
+            "zh-CN": "按钮标签",
+            "zh-TW": "按鈕標籤"
           }
         },
         {
@@ -697,7 +819,10 @@
             "fr": "Lien du bouton",
             "it": "Link slide",
             "ja": "スライドリンク",
-            "pt-BR": "Link do slide"
+            "nl": "Knoplink",
+            "pt-BR": "Link do slide",
+            "zh-CN": "按钮链接",
+            "zh-TW": "按鈕連結"
           }
         }
       ]
@@ -712,7 +837,10 @@
         "fr": "Diaporama",
         "it": "Presentazione",
         "ja": "スライドショー",
-        "pt-BR": "Apresentação de slides"
+        "nl": "Diavoorstelling",
+        "pt-BR": "Apresentação de slides",
+        "zh-CN": "幻灯片",
+        "zh-TW": "投影片輪播"
       },
       "category": {
         "de": "Foto",
@@ -721,7 +849,10 @@
         "fr": "Image",
         "it": "Immagine",
         "ja": "画像",
-        "pt-BR": "Imagem"
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
       },
       "settings": {
         "autorotate": false,

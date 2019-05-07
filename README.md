@@ -14,30 +14,20 @@ This is a simple challenge to test some front-end basics in a Shopify Environmen
 5. Use `theme watch` to push files to your theme on the Shopify Development Store.
 
 
-##### Challenge:
-1. Add a datepicker to the cart page. 
-2. Dynamically set a cart note attribute named **"Ship Date"** to the value of the datepicker.
-    * See [Shopify Docs](https://help.shopify.com/en/themes/customization/cart/get-more-information-with-cart-attributes) on Cart Attributes.
-3. format the date `yyyy-mm-dd`
+##### Challenge: Create a Subscription Sales Funnel
+1. Create a new page template
+2. Create a section for this page
+  a. Add a product picker to schema
+3. Display Product image, title, and price with liquid.
+3. Add a CTA button to add to cart
+  a. Use Javascript to add product to cart
+  b. Use line item properties to add Recharge data so the item will be subscribed on a 6 month interval.
+4. Once item has been added to cart, redirect to Recharge Checkout.
 
 ##### Extra Credit:
 1. Find a store that inspires you on [Commerce Cream](https://commercecream.com/)
-2. Replicate the Cart Page Styling
-    * (if it is shopify add a product to cart and navigate to `/cart`)
+2. Replicate any Page (Product) Styling
 
-##### Notes:
-* In order to test the challenge I expect to:
-    * Add product to cart
-    * set date
-    * click checkout
-    * In the Chrome Developer Console I can run this script to retun the cart object:
-        ```
-        fetch('/cart.js')
-          .then(function(response) {
-            return response.json();
-          })
-          .then(function(myJson) {
-            console.log(myJson);
-          });
-        ```
-    * **Ship Date** attribute with date set on cart will be in this response.
+
+##### Helpful Docs:
+[Recharge Docs](https://support.rechargepayments.com/hc/en-us/categories/360000578474-Third-Party-Integrations-and-Advanced-Customization)

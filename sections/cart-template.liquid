@@ -1,15 +1,18 @@
 <div class="page-width" data-section-id="{{ section.id }}" data-section-type="cart-template">
 
   {% if cart.item_count > 0 %}
-    <div class="section-header text-center">
-      <h1>{{ 'cart.general.title' | t }}</h1>
+    <div class="cart-header">
+      <h1 class="cart-header__title">{{ 'cart.general.title' | t }}</h1>
+      <a href="/collections/all" class="text-link text-link--accent">
+        {{ 'cart.general.continue_shopping' | t }}
+      </a>
     </div>
 
     <form action="/cart" method="post" novalidate class="cart">
       <table>
         <thead class="cart__row">
           <th colspan="2" scope="col">{{ 'cart.label.product' | t }}</th>
-          <th class="cart__row-price" scope="col">{{ 'cart.label.price' | t }}</th>
+          <th class="text-right" scope="col">{{ 'cart.label.price' | t }}</th>
           <th class="text-center small--hide" scope="col">{{ 'cart.label.quantity' | t }}</th>
           <th class="text-right small--hide" scope="col">{{ 'cart.label.total' | t }}</th>
         </thead>
@@ -23,13 +26,14 @@
               </td>
               <td class="cart__meta small--text-left">
                 <div class="list-view-item__title">
-                  <a href="{{ item.url }}">
+                  <a href="{{ item.url }}" class="cart__product-title">
                     {{ item.product.title }}
                     {% if item.quantity > 1 %}
                       <span class="medium-up--hide"><span class="visually-hidden">{{ 'cart.label.quantity' | t }}</span>(x{{ item.quantity }})</span>
                     {% endif %}
                   </a>
                 </div>
+
                 {% unless item.variant.title contains 'Default' %}
                   <div class="cart__meta-text">
                     {% for option in item.product.options %}
@@ -67,16 +71,39 @@
                   </div>
                 {% endif %}
 
-                <p class="small--hide">
-                  <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="btn btn--small btn--tertiary cart__remove" aria-label="{{ 'cart.general.remove' | t }} {{ item.product.title }}">{{ 'cart.general.remove' | t }}</a>
+                <p class="cart__remove small--hide">
+                  <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="text-link text-link--accent" aria-label="{{ 'cart.general.remove' | t }} {{ item.product.title }}">{{ 'cart.general.remove' | t }}</a>
                 </p>
               </td>
-              <td class="cart__price-wrapper">
-                {{ item.price | money }}
+              <td class="cart__price-wrapper text-right">
+                {%- if item.original_price != item.final_price -%}
+                  <dl>
+                    <dt>
+                      <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                    </dt>
+                    <dd>
+                      <s>{{ item.original_price | money }}</s>
+                    </dd>
+                    <dt>
+                      <span class="visually-hidden">{{ 'products.product.sale_price' | t }}</span>
+                    </dt>
+                    <dd>
+                      <span class="order-discount">{{ item.final_price | money }}</span>
+                    </dd>
+                  </dl>
+                {%- else -%}
+                  {{ item.original_price | money }}
+                {%- endif -%}
 
-                {% for discount in item.discounts %}
-                  <div class="cart-item__discount medium-up--hide">{{ discount.title }}</div>
-                {% endfor %}
+                {%- if item.line_level_discount_allocations != blank -%}
+                  <ul class="order-discount order-discount--list order-discount--title order-discount--cart" aria-label="{{ 'customer.order.discount' | t }}">
+                    {%- for discount_allocation in item.line_level_discount_allocations -%}
+                      <li class="order-discount__item">
+                        {%- include 'icon-saletag' -%}{{ discount_allocation.discount_application.title }} (-{{ discount_allocation.amount | money }})
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
 
                 <div class="cart__edit medium-up--hide">
                   <button type="button" class="btn btn--secondary btn--small js-edit-toggle cart__edit--active" data-target="line{{ forloop.index }}" aria-label="{{ 'cart.general.edit' | t }} {{ item.product.title }}" aria-expanded="false">
@@ -92,24 +119,31 @@
                 </div>
               </td>
               <td class="text-right small--hide">
-                {% if item.original_line_price != item.line_price %}
-                  <div class="cart-item__original-price"><s>{{ item.original_line_price | money }}</s></div>
-                {% endif %}
-
-                <div>
-                  {{ item.line_price | money }}
-                </div>
-
-                {% for discount in item.discounts %}
-                  <div class="cart-item__discount">{{ discount.title }}</div>
-                {% endfor %}
+                {%- if item.original_line_price != item.final_line_price -%}
+                  <dl>
+                    <dt>
+                      <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                    </dt>
+                    <dd>
+                      <s>{{ item.original_line_price | money }}</s>
+                    </dd>
+                    <dt>
+                      <span class="visually-hidden">{{ 'products.product.sale_price' | t }}</span>
+                    </dt>
+                    <dd>
+                      <span class="order-discount">{{ item.final_line_price | money }}</span>
+                    </dd>
+                  </dl>
+                {%- else -%}
+                  {{ item.original_line_price | money }}
+                {%- endif -%}
               </td>
             </tr>
             <tr class="medium-up--hide cart__update-wrapper">
               <td colspan="3" class="text-right">
                 <div class="cart__update-controls">
                   <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0"
-                    class="btn btn--small btn--tertiary cart__remove medium-up--hide cart__update-control"
+                    class="text-link text-link--accent medium-up--hide cart__update-control cart__update-control--remove"
                     aria-label="{{ 'cart.general.remove' | t }} {{ item.product.title }}">
                       {{ 'cart.general.remove' | t }}
                   </a>
@@ -142,16 +176,22 @@
             </div>
           {% endif %}
           <div class="grid__item text-right small--text-center{% if section.settings.cart_notes_enable %} medium-up--one-half{% endif %}">
-            <div>
-              <span class="cart__subtotal-title">{{ 'cart.general.subtotal' | t }}</span>
-              <span class="cart__subtotal">{{ cart.total_price | money }}</span>
-            </div>
-            {% if cart.total_discounts > 0 %}
-              <div class="cart__savings">
-                {{ 'cart.general.savings' | t }}
-                <span class="cart__savings-amount">{{ cart.total_discounts | money }}</span>
+
+            {%- if cart.cart_level_discount_applications != blank -%}
+              <div class="order-discount-card-wrapper">
+                {%- for discount_application in cart.cart_level_discount_applications -%}
+                  <span class="order-discount order-discount--title order-discount--cart">
+                    {%- include 'icon-saletag' -%}<span class="visually-hidden">{{ 'customer.order.discount' | t }}:</span>{{- discount_application.title -}}
+                  </span>
+                  <span class="order-discount order-discount--cart order-discount--cart-total">-{{ discount_application.total_allocated_amount | money }}</span>
+                {%- endfor -%}
               </div>
-            {% endif %}
+            {%- endif -%}
+
+            <div class="cart-subtotal">
+              <span class="cart-subtotal__title">{{ 'cart.general.subtotal' | t }}</span>
+              <span class="cart-subtotal__price">{{ cart.total_price | money }}</span>
+            </div>
 
             {%- capture taxes_shipping_checkout -%}
               {%- if shop.taxes_included and shop.shipping_policy.body != blank -%}
@@ -166,9 +206,6 @@
             {%- endcapture -%}
             <div class="cart__shipping rte">{{ taxes_shipping_checkout }}</div>
             <div class="cart__submit-controls">
-              <a href="collections/all" class="btn btn--secondary cart__continue small--hide cart__submit-control" >
-                {{ 'cart.general.continue_shopping' | t }}
-              </a>
               <input type="submit" name="update"
                 class="btn btn--secondary small--hide cart__submit-control"
                 value="{{ 'cart.general.update' | t }}">
@@ -207,7 +244,10 @@
     "fr": "Page du panier",
     "it": "Pagina del carrello",
     "ja": "カートページ",
-    "pt-BR": "Página do carrinho"
+    "nl": "Winkelwagenpagina",
+    "pt-BR": "Página do carrinho",
+    "zh-CN": "购物车页面",
+    "zh-TW": "購物車頁面"
   },
   "settings": [
     {
@@ -220,7 +260,10 @@
         "fr": "Activer les notes de panier",
         "it": "Abilita note carrello",
         "ja": "カートメモを有効にする",
-        "pt-BR": "Ativar observações sobre o carrinho"
+        "nl": "Notities voor winkelwagen inschakelen",
+        "pt-BR": "Ativar observações sobre o carrinho",
+        "zh-CN": "启用购物车备注",
+        "zh-TW": "啟用購物車備註"
       },
       "default": false
     }

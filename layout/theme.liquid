@@ -54,7 +54,8 @@
         authError: {{ 'sections.map.auth_error_html' | t | json }},
         newWindow: {{ 'general.accessibility.link_messages.new_window' | t | json }},
         external: {{ 'general.accessibility.link_messages.external' | t | json }},
-        newWindowExternal: {{ 'general.accessibility.link_messages.new_window_and_external' | t | json }}
+        newWindowExternal: {{ 'general.accessibility.link_messages.new_window_and_external' | t | json }},
+        quantityMinimumMessage: {{ 'products.product.quantity_minimum_message' | t | json }}
       },
       moneyFormat: {{ shop.money_format | json }}
     }
@@ -118,5 +119,7 @@
     <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
     <li id="a11y-selection-message">{{ 'general.accessibility.selection_help' | t }}</li>
   </ul>
+
+  {% include 'subscription-theme-footer' %}
 </body>
 </html>
