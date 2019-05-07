@@ -90,7 +90,7 @@
                 <div class="video-play-loader"></div>
               {%- endif -%}
               <button type="button" class="btn video-control video-control__play" data-controls="Video-{{ section.id }}">
-                {% include 'icon-play-video' %}
+                {% include 'icon-play' %}
                 <span class="icon__fallback-text">{{ 'sections.video.play' | t }}</span>
               </button>
             </div>
@@ -103,7 +103,7 @@
           <div class="video-play-loader"></div>
         {%- endif -%}
         <button type="button" class="btn video-control video-control__play" data-controls="Video-{{ section.id }}">
-          {%- include 'icon-play-video' -%}
+          {%- include 'icon-play' -%}
           <span class="icon__fallback-text">{{ 'sections.video.play' | t }}</span>
         </button>
       </div>
@@ -114,7 +114,7 @@
           <span class="icon__fallback-text">{{ 'sections.video.pause' | t }}</span>
         </span>
         <span class="video__pause-resume">
-          {% include 'icon-play-video' %}
+          {% include 'icon-play' %}
           <span class="icon__fallback-text">{{ 'sections.video.resume' | t }}</span>
         </span>
       </button>
@@ -135,7 +135,10 @@
     "fr": "Vidéo",
     "it": "Video",
     "ja": "動画",
-    "pt-BR": "Vídeo"
+    "nl": "Video",
+    "pt-BR": "Vídeo",
+    "zh-CN": "视频",
+    "zh-TW": "影片"
   },
   "class": "index-section video-section",
   "settings": [
@@ -149,7 +152,10 @@
         "fr": "Image de couverture",
         "it": "Immagine di copertina",
         "ja": "表紙画像",
-        "pt-BR": "Imagem de capa"
+        "nl": "Coverafbeelding",
+        "pt-BR": "Imagem de capa",
+        "zh-CN": "封面图片",
+        "zh-TW": "封面圖片"
       },
       "info": {
         "de": "Wird immer auf Mobilgeräten angezeigt",
@@ -158,7 +164,10 @@
         "fr": "S'affiche toujours sur les appareils mobiles",
         "it": "Sempre visualizzata sui dispositivi mobili",
         "ja": "常にモバイル端末に表示",
-        "pt-BR": "Sempre mostrado em dispositivos móveis"
+        "nl": "Altijd weergeven op mobiele apparaten",
+        "pt-BR": "Sempre mostrado em dispositivos móveis",
+        "zh-CN": "始终在移动设备上显示",
+        "zh-TW": "一律在行動裝置上顯示"
       }
     },
     {
@@ -171,7 +180,10 @@
         "fr": "Alignement de l'image",
         "it": "Allineamento immagine",
         "ja": "画像アラインメント",
-        "pt-BR": "Alinhamento da imagem"
+        "nl": "Afbeelding uitlijnen",
+        "pt-BR": "Alinhamento da imagem",
+        "zh-CN": "图片对齐方式",
+        "zh-TW": "圖片對齊"
       },
       "default": "center center",
       "options": [
@@ -183,7 +195,10 @@
             "fr": "En haut à gauche",
             "it": "In alto a sinistra",
             "ja": "左上",
-            "pt-BR": "Superior esquerdo"
+            "nl": "Linksboven",
+            "pt-BR": "Superior esquerdo",
+            "zh-CN": "左上方",
+            "zh-TW": "左上角"
           },
           "value": "left top"
         },
@@ -195,7 +210,10 @@
             "fr": "En haut au centre",
             "it": "In alto al centro",
             "ja": "中央上",
-            "pt-BR": "Superior centro"
+            "nl": "Midden boven",
+            "pt-BR": "Superior centro",
+            "zh-CN": "顶部居中",
+            "zh-TW": "中央上方"
           },
           "value": "center top"
         },
@@ -207,7 +225,10 @@
             "fr": "En haut à droite",
             "it": "In alto a destra",
             "ja": "右上",
-            "pt-BR": "Superior direito"
+            "nl": "Rechtsboven",
+            "pt-BR": "Superior direito",
+            "zh-CN": "右上方",
+            "zh-TW": "右上角"
           },
           "value": "right top"
         },
@@ -219,7 +240,10 @@
             "fr": "Au milieu à gauche",
             "it": "Nel mezzo a sinistra",
             "ja": "中央左",
-            "pt-BR": "Meio esquerdo"
+            "nl": "Midden links",
+            "pt-BR": "Meio esquerdo",
+            "zh-CN": "中间居左",
+            "zh-TW": "中央左方"
           },
           "value": "left center"
         },
@@ -231,7 +255,10 @@
             "fr": "Centrée au milieu",
             "it": "In mezzo",
             "ja": "中央中",
-            "pt-BR": "Meio centro"
+            "nl": "Midden centrum",
+            "pt-BR": "Meio centro",
+            "zh-CN": "中间居中",
+            "zh-TW": "正中央"
           },
           "value": "center center"
         },
@@ -243,7 +270,10 @@
             "fr": "Au milieu à droite",
             "it": "Nel mezzo a destra",
             "ja": "中央右",
-            "pt-BR": "Meio direito"
+            "nl": "Midden rechts",
+            "pt-BR": "Meio direito",
+            "zh-CN": "中间居右",
+            "zh-TW": "中央右方"
           },
           "value": "right center"
         },
@@ -255,7 +285,10 @@
             "fr": "En bas à gauche",
             "it": "In basso a sinistra",
             "ja": "左下",
-            "pt-BR": "Inferior esquerdo"
+            "nl": "Linksonder",
+            "pt-BR": "Inferior esquerdo",
+            "zh-CN": "左下方",
+            "zh-TW": "左下角"
           },
           "value": "left bottom"
         },
@@ -267,7 +300,10 @@
             "fr": "En bas au centre",
             "it": "In basso al centro",
             "ja": "中央下",
-            "pt-BR": "Inferior centro"
+            "nl": "Midden onder",
+            "pt-BR": "Inferior centro",
+            "zh-CN": "底部居中",
+            "zh-TW": "中央下方"
           },
           "value": "center bottom"
         },
@@ -279,7 +315,10 @@
             "fr": "En bas à droite",
             "it": "In basso a destra",
             "ja": "右下",
-            "pt-BR": "Inferior direito"
+            "nl": "Rechtsonder",
+            "pt-BR": "Inferior direito",
+            "zh-CN": "右下方",
+            "zh-TW": "右下角"
           },
           "value": "right bottom"
         }
@@ -295,7 +334,10 @@
         "fr": "Lien de la vidéo",
         "it": "Link video",
         "ja": "ビデオリンク",
-        "pt-BR": "Link do vídeo"
+        "nl": "Videolink",
+        "pt-BR": "Link do vídeo",
+        "zh-CN": "视频链接",
+        "zh-TW": "影片連結"
       },
       "accept": [
         "youtube"
@@ -312,7 +354,10 @@
         "fr": "Afficher la superposition",
         "it": "Mostra sovrapposizione",
         "ja": "オーバーレイを表示する",
-        "pt-BR": "Exibir sobreposição"
+        "nl": "Overlay weergeven",
+        "pt-BR": "Exibir sobreposição",
+        "zh-CN": "显示叠加",
+        "zh-TW": "顯示疊加層"
       },
       "default": true
     },
@@ -326,7 +371,10 @@
         "fr": "Style",
         "it": "Stile",
         "ja": "スタイル",
-        "pt-BR": "Estilo"
+        "nl": "Stijl",
+        "pt-BR": "Estilo",
+        "zh-CN": "样式",
+        "zh-TW": "樣式"
       },
       "default": "image_with_play",
       "options": [
@@ -338,7 +386,10 @@
             "fr": "Image avec bouton de lecture",
             "it": "Immagine con pulsante play",
             "ja": "再生ボタン付き画像",
-            "pt-BR": "Imagem com botão de reprodução"
+            "nl": "Afbeelding met knop afspelen",
+            "pt-BR": "Imagem com botão de reprodução",
+            "zh-CN": "带播放按钮的图片",
+            "zh-TW": "附播放按鈕的圖片"
           },
           "value": "image_with_play"
         },
@@ -350,7 +401,10 @@
             "fr": "Vidéo d'arrière-plan",
             "it": "Video in background",
             "ja": "背景ビデオ",
-            "pt-BR": "Vídeo de fundo"
+            "nl": "Achtergrondvideo",
+            "pt-BR": "Vídeo de fundo",
+            "zh-CN": "背景视频",
+            "zh-TW": "背景影片"
           },
           "value": "background"
         }
@@ -366,7 +420,10 @@
         "fr": "Hauteur de la vidéo",
         "it": "Altezza video",
         "ja": "ビデオの高さ",
-        "pt-BR": "Altura do vídeo"
+        "nl": "Videohoogte",
+        "pt-BR": "Altura do vídeo",
+        "zh-CN": "视频高度",
+        "zh-TW": "影片高度"
       },
       "default": "medium",
       "options": [
@@ -378,7 +435,10 @@
             "fr": "Petit",
             "it": "Piccolo",
             "ja": "スモール",
-            "pt-BR": "Pequeno"
+            "nl": "Klein",
+            "pt-BR": "Pequeno",
+            "zh-CN": "小",
+            "zh-TW": "小型"
           },
           "value": "small"
         },
@@ -390,7 +450,10 @@
             "fr": "Moyen",
             "it": "Medio",
             "ja": "中",
-            "pt-BR": "Médio"
+            "nl": "Gemiddeld",
+            "pt-BR": "Médio",
+            "zh-CN": "中等",
+            "zh-TW": "中等"
           },
           "value": "medium"
         },
@@ -402,7 +465,10 @@
             "fr": "Grand",
             "it": "Grande",
             "ja": "ラージ",
-            "pt-BR": "Grande"
+            "nl": "Groot",
+            "pt-BR": "Grande",
+            "zh-CN": "大",
+            "zh-TW": "大型"
           },
           "value": "large"
         }
@@ -418,7 +484,10 @@
         "fr": "En-tête",
         "it": "Heading",
         "ja": "見出し",
-        "pt-BR": "Título"
+        "nl": "Kop",
+        "pt-BR": "Título",
+        "zh-CN": "标题",
+        "zh-TW": "標題"
       }
     },
     {
@@ -431,7 +500,10 @@
         "fr": "Taille du texte",
         "it": "Dimensione testo",
         "ja": "文字サイズ",
-        "pt-BR": "Tamanho do texto"
+        "nl": "Tekengrootte",
+        "pt-BR": "Tamanho do texto",
+        "zh-CN": "文本大小",
+        "zh-TW": "文字尺寸"
       },
       "default": "medium",
       "options": [
@@ -443,7 +515,10 @@
             "fr": "Moyenne",
             "it": "Medio",
             "ja": "中",
-            "pt-BR": "Médio"
+            "nl": "Gemiddeld",
+            "pt-BR": "Médio",
+            "zh-CN": "中等",
+            "zh-TW": "中等"
           },
           "value": "medium"
         },
@@ -455,7 +530,10 @@
             "fr": "Grande",
             "it": "Grande",
             "ja": "大",
-            "pt-BR": "Grande"
+            "nl": "Groot",
+            "pt-BR": "Grande",
+            "zh-CN": "大",
+            "zh-TW": "大型"
           },
           "value": "large"
         }
@@ -471,7 +549,10 @@
         "fr": "Vidéo",
         "it": "Video",
         "ja": "動画",
-        "pt-BR": "Vídeo"
+        "nl": "Video",
+        "pt-BR": "Vídeo",
+        "zh-CN": "视频",
+        "zh-TW": "影片"
       },
       "category": {
         "de": "Video",
@@ -480,7 +561,10 @@
         "fr": "Vidéo",
         "it": "Video",
         "ja": "動画",
-        "pt-BR": "Vídeo"
+        "nl": "Video",
+        "pt-BR": "Vídeo",
+        "zh-CN": "视频",
+        "zh-TW": "影片"
       },
       "settings": {
         "image_position": "center center",

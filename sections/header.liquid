@@ -295,37 +295,38 @@
 {
   "@context": "http://schema.org",
   "@type": "Organization",
-  "name": "{{ shop.name }}",
+  "name": {{ shop.name | json }},
   {% if section.settings.logo %}
     {% assign image_size = section.settings.logo.width | append:'x' %}
-    "logo": "https:{{ section.settings.logo | img_url: image_size }}",
+    "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
   {% endif %}
   "sameAs": [
-    "{{ settings.social_twitter_link }}",
-    "{{ settings.social_facebook_link }}",
-    "{{ settings.social_pinterest_link }}",
-    "{{ settings.social_instagram_link }}",
-    "{{ settings.social_tumblr_link }}",
-    "{{ settings.social_snapchat_link }}",
-    "{{ settings.social_youtube_link }}",
-    "{{ settings.social_vimeo_link }}"
+    {{ settings.social_twitter_link | json }},
+    {{ settings.social_facebook_link | json }},
+    {{ settings.social_pinterest_link | json }},
+    {{ settings.social_instagram_link | json }},
+    {{ settings.social_tumblr_link | json }},
+    {{ settings.social_snapchat_link | json }},
+    {{ settings.social_youtube_link | json }},
+    {{ settings.social_vimeo_link | json }}
   ],
-  "url": "{{ shop.url }}{{ page.url }}"
+  "url": {{ shop.url | append: page.url | json }}
 }
 </script>
 
 {% if template.name == 'index' %}
+  {% assign potential_action_target = shop.url | append: "/search?q={search_term_string}" %}
   <script type="application/ld+json">
     {
       "@context": "http://schema.org",
       "@type": "WebSite",
-      "name": "{{ shop.name }}",
+      "name": {{ shop.name | json }},
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "{{ shop.url }}/search?q={search_term_string}",
+        "target": {{ potential_action_target | json }},
         "query-input": "required name=search_term_string"
       },
-      "url": "{{ shop.url }}{{ page.url }}"
+      "url": {{ shop.url | append: page.url | json }}
     }
   </script>
 {% endif %}
@@ -339,7 +340,10 @@
     "fr": "En-tête",
     "it": "Header",
     "ja": "ヘッダー",
-    "pt-BR": "Cabeçalho"
+    "nl": "Koptekst",
+    "pt-BR": "Cabeçalho",
+    "zh-CN": "标头",
+    "zh-TW": "標頭"
   },
   "settings": [
     {
@@ -352,7 +356,10 @@
         "fr": "Alignement du logo",
         "it": "Allineamento logo",
         "ja": "ロゴアラインメント",
-        "pt-BR": "Alinhamento do logotipo"
+        "nl": "Logo-uitlijning",
+        "pt-BR": "Alinhamento do logotipo",
+        "zh-CN": "徽标对齐方式",
+        "zh-TW": "商標對齊"
       },
       "default": "left",
       "options": [
@@ -365,7 +372,10 @@
             "fr": "Gauche",
             "it": "Sinistra",
             "ja": "左",
-            "pt-BR": "Esquerda"
+            "nl": "Links",
+            "pt-BR": "Esquerda",
+            "zh-CN": "左侧",
+            "zh-TW": "左方"
           }
         },
         {
@@ -377,7 +387,10 @@
             "fr": "Centré",
             "it": "Centrato",
             "ja": "中央揃え",
-            "pt-BR": "Centralizado"
+            "nl": "Gecentreerd",
+            "pt-BR": "Centralizado",
+            "zh-CN": "居中",
+            "zh-TW": "置中"
           }
         }
       ]
@@ -392,7 +405,10 @@
         "fr": "Image du logo",
         "it": "Immagine del logo",
         "ja": "ロゴ画像",
-        "pt-BR": "Imagem do logotipo"
+        "nl": "Afbeelding van logo",
+        "pt-BR": "Imagem do logotipo",
+        "zh-CN": "徽标图片",
+        "zh-TW": "標誌圖片"
       }
     },
     {
@@ -405,7 +421,10 @@
         "fr": "Largeur personnalisée du logo",
         "it": "Larghezza logo personalizzato",
         "ja": "ロゴの幅をカスタムする",
-        "pt-BR": "Largura do logotipo personalizado"
+        "nl": "Aangepaste logo-breedte",
+        "pt-BR": "Largura do logotipo personalizado",
+        "zh-CN": "自定义徽标宽度",
+        "zh-TW": "自訂商標寬度"
       },
       "min": 50,
       "max": 250,
@@ -417,7 +436,10 @@
         "fr": "px",
         "it": "px",
         "ja": "px",
-        "pt-BR": "px"
+        "nl": "px",
+        "pt-BR": "px",
+        "zh-CN": "px",
+        "zh-TW": "像素"
       },
       "default": 100
     },
@@ -431,7 +453,10 @@
         "fr": "Menu",
         "it": "Menu",
         "ja": "メニュー",
-        "pt-BR": "Menu"
+        "nl": "Menu",
+        "pt-BR": "Menu",
+        "zh-CN": "菜单",
+        "zh-TW": "選單"
       },
       "default": "main-menu"
     },
@@ -444,7 +469,10 @@
         "fr": "Barre d'annonces",
         "it": "Barra degli annunci",
         "ja": "告知バー",
-        "pt-BR": "Barra de anúncios"
+        "nl": "Aankondigingsbalk",
+        "pt-BR": "Barra de anúncios",
+        "zh-CN": "公告栏",
+        "zh-TW": "公告列"
       }
     },
     {
@@ -457,7 +485,10 @@
         "fr": "Afficher l'annonce",
         "it": "Mostra annuncio",
         "ja": "告知を表示する",
-        "pt-BR": "Exibir anúncio"
+        "nl": "Aankondiging weergeven",
+        "pt-BR": "Exibir anúncio",
+        "zh-CN": "显示公告",
+        "zh-TW": "顯示公告"
       },
       "default": false
     },
@@ -471,7 +502,10 @@
         "fr": "Page d'accueil uniquement",
         "it": "Solo home page",
         "ja": "ホームページのみ",
-        "pt-BR": "Apenas página inicial"
+        "nl": "Alleen startpagina",
+        "pt-BR": "Apenas página inicial",
+        "zh-CN": "仅主页",
+        "zh-TW": "僅限首頁"
       },
       "default": true
     },
@@ -485,7 +519,10 @@
         "fr": "Texte",
         "it": "Testo",
         "ja": "テキスト",
-        "pt-BR": "Texto"
+        "nl": "Tekst",
+        "pt-BR": "Texto",
+        "zh-CN": "文本",
+        "zh-TW": "文字"
       },
       "default": {
         "de": "Hier etwas ankündigen",
@@ -494,7 +531,10 @@
         "fr": "Annoncez quelque chose ici",
         "it": "Annuncia qualcosa qui",
         "ja": "ここで告知してください",
-        "pt-BR": "Anuncie algo aqui"
+        "nl": "Kondig hier iets aan",
+        "pt-BR": "Anuncie algo aqui",
+        "zh-CN": "在此处进行公告",
+        "zh-TW": "在此公告資訊"
       }
     },
     {
@@ -507,7 +547,10 @@
         "fr": "Lien",
         "it": "Link",
         "ja": "リンク",
-        "pt-BR": "Link"
+        "nl": "Link",
+        "pt-BR": "Link",
+        "zh-CN": "链接",
+        "zh-TW": "連結"
       },
       "info": {
         "de": "Optional",
@@ -516,7 +559,10 @@
         "fr": "Facultatif",
         "it": "Facoltativo",
         "ja": "選択させる",
-        "pt-BR": "Opcional"
+        "nl": "Optioneel",
+        "pt-BR": "Opcional",
+        "zh-CN": "可选",
+        "zh-TW": "(選填)"
       }
     },
     {
@@ -529,7 +575,10 @@
         "fr": "Barre",
         "it": "Barra",
         "ja": "バー",
-        "pt-BR": "Barra"
+        "nl": "Balk",
+        "pt-BR": "Barra",
+        "zh-CN": "栏",
+        "zh-TW": "橫條"
       },
       "default": "#7796a8"
     },
@@ -543,7 +592,10 @@
         "fr": "Texte",
         "it": "Testo",
         "ja": "テキスト",
-        "pt-BR": "Texto"
+        "nl": "Tekst",
+        "pt-BR": "Texto",
+        "zh-CN": "文本",
+        "zh-TW": "文字"
       },
       "default": "#fff"
     }

@@ -2242,7 +2242,7 @@ theme.Video = (function() {
   }
 
   function getVideoOptions(evt) {
-    return videos[evt.target.h.id];
+    return videos[evt.target.a.id];
   }
 
   function toggleExpandVideo(playerId, expand) {
@@ -2554,6 +2554,48 @@ theme.FormStatus = (function() {
   return {
     init: init
   };
+})();
+
+theme.Hero = (function() {
+  var classes = {
+    indexSectionFlush: 'index-section--flush'
+  };
+
+  var selectors = {
+    heroFixedWidthContent: '.hero-fixed-width__content',
+    heroFixedWidthImage: '.hero-fixed-width__image'
+  };
+
+  function hero(el, sectionId) {
+    this.$hero = $(el);
+    this.layout = this.$hero.data('layout');
+    var $parentSection = $('#shopify-section-' + sectionId);
+    var $heroContent = $parentSection.find(selectors.heroFixedWidthContent);
+    var $heroImage = $parentSection.find(selectors.heroFixedWidthImage);
+
+    if (this.layout !== 'fixed_width') {
+      return;
+    }
+
+    $parentSection.removeClass(classes.indexSectionFlush);
+    heroFixedHeight();
+    $(window).resize(
+      $.debounce(50, function() {
+        heroFixedHeight();
+      })
+    );
+
+    function heroFixedHeight() {
+      var contentHeight = $heroContent.height() + 50;
+      var imageHeight = $heroImage.height();
+
+      if (contentHeight > imageHeight) {
+        $heroImage.css('min-height', contentHeight);
+      }
+    }
+  }
+
+  return hero;
 })();
 
 
@@ -3173,13 +3215,15 @@ theme.Product = (function() {
     };
 
     this.selectors = {
-      addToCart: '#AddToCart-' + sectionId,
-      addToCartText: '#AddToCartText-' + sectionId,
-      errorQuantityMessage: '#error-quantity-' + sectionId,
-      quantity: '#Quantity-' + sectionId,
+      addToCart: '[data-add-to-cart]',
+      addToCartText: '[data-add-to-cart-text]',
+      quantity: '[data-quantity-input]',
       SKU: '.variant-sku',
       productStatus: '[data-product-status]',
       originalSelectorId: '#ProductSelect-' + sectionId,
+      productForm: '[data-product-form]',
+      errorMessage: '[data-error-message]',
+      errorMessageWrapper: '[data-error-message-wrapper]',
       productImageWraps: '.product-single__photo',
       productThumbImages: '.product-single__thumbnail--' + sectionId,
       productThumbs: '.product-single__thumbnails-' + sectionId,
@@ -3196,10 +3240,23 @@ theme.Product = (function() {
 
     this.classes = {
       hidden: 'hide',
+      inputError: 'input--error',
       productOnSale: 'price--on-sale',
       productUnavailable: 'price--unavailable',
+      productFormErrorMessageWrapperHidden:
+        'product-form__error-message-wrapper--hidden',
       activeClass: 'active-thumb'
     };
+
+    this.errors = {
+      quantityMinumumMessage: theme.strings.quantityMinimumMessage
+    };
+
+    this.$quantityInput = $(this.selectors.quantity, $container);
+    this.$errorMessageWrapper = $(
+      this.selectors.errorMessageWrapper,
+      $container
+    );
 
     // Stop parsing if we don't have the product json script tag when loading
     // section in the Theme Editor
@@ -3320,33 +3377,65 @@ theme.Product = (function() {
 
     _initAddToCart: function() {
       var self = this;
-      var $quantityInput = $(self.selectors.quantity);
 
-      if ($quantityInput.length === 0) return;
+      $(self.selectors.productForm, self.$container).on('submit', function(
+        evt
+      ) {
+        evt.preventDefault();
 
-      $(self.selectors.addToCart).on('click', function(evt) {
-        var isInvalidQuantity = $quantityInput.val() <= 0;
+        var $addToCart = $(self.selectors.addToCart, self.$container);
+        var isInvalidQuantity = self.$quantityInput.val() <= 0;
 
-        $(self.selectors.errorQuantityMessage).toggleClass(
-          self.classes.hidden,
-          !isInvalidQuantity
-        );
+        if ($addToCart.is('[disabled]')) return;
 
         if (isInvalidQuantity) {
-          $quantityInput
-            .attr(
-              'aria-describedby',
-              'error-quantity-' + self.settings.sectionId
-            )
-            .attr('aria-invalid', true);
-          $(self.selectors.errorQuantityMessage).focus();
-          evt.preventDefault();
+          self._showErrorMessage(self.errors.quantityMinumumMessage);
         } else {
-          $quantityInput
-            .removeAttr('aria-describedby')
-            .removeAttr('aria-invalid');
+          var $data = $(self.selectors.productForm, self.$container);
+          self._addItemToCart($data);
         }
       });
+    },
+
+    _addItemToCart: function(data) {
+      var self = this;
+      var params = {
+        url: '/cart/add.js',
+        data: jQuery(data).serialize(),
+        dataType: 'json'
+      };
+
+      jQuery
+        .post(params)
+        .done(function() {
+          window.location.href = '/cart';
+        })
+        .fail(function(response) {
+          self._showErrorMessage(response.responseJSON.description);
+        });
+    },
+
+    _showErrorMessage: function(errorMessage) {
+      $(this.selectors.errorMessage, this.$container).html(errorMessage);
+
+      if (this.$quantityInput.length !== 0) {
+        this.$quantityInput.addClass(this.classes.inputError);
+      }
+
+      this.$errorMessageWrapper
+        .removeClass(this.classes.productFormErrorMessageWrapperHidden)
+        .attr('aria-hidden', true)
+        .removeAttr('aria-hidden');
+    },
+
+    _hideErrorMessage: function() {
+      this.$errorMessageWrapper.addClass(
+        this.classes.productFormErrorMessageWrapperHidden
+      );
+
+      if (this.$quantityInput.length !== 0) {
+        this.$quantityInput.removeClass(this.classes.inputError);
+      }
     },
 
     _setActiveThumbnail: function(imageId) {
@@ -3514,24 +3603,33 @@ theme.Product = (function() {
 
       if (variant) {
         if (variant.available) {
-          $(this.selectors.addToCart).prop('disabled', false);
-          $(this.selectors.addToCartText).text(theme.strings.addToCart);
+          $(this.selectors.addToCart, this.$container).prop('disabled', false);
+          $(this.selectors.addToCartText, this.$container).text(
+            theme.strings.addToCart
+          );
           $(this.selectors.shopifyPaymentButton, this.$container).show();
         } else {
           // The variant doesn't exist, disable submit button and change the text.
           // This may be an error or notice that a specific variant is not available.
-          $(this.selectors.addToCart).prop('disabled', true);
-          $(this.selectors.addToCartText).text(theme.strings.soldOut);
+          $(this.selectors.addToCart, this.$container).prop('disabled', true);
+          $(this.selectors.addToCartText, this.$container).text(
+            theme.strings.soldOut
+          );
           $(this.selectors.shopifyPaymentButton, this.$container).hide();
         }
       } else {
-        $(this.selectors.addToCart).prop('disabled', true);
-        $(this.selectors.addToCartText).text(theme.strings.unavailable);
+        $(this.selectors.addToCart, this.$container).prop('disabled', true);
+        $(this.selectors.addToCartText, this.$container).text(
+          theme.strings.unavailable
+        );
         $(this.selectors.shopifyPaymentButton, this.$container).hide();
       }
     },
 
     _updateAvailability: function(evt) {
+      // remove error message if one is showing
+      this._hideErrorMessage();
+
       // update form submit
       this._updateAddToCart(evt);
       // update live region
@@ -3792,6 +3890,19 @@ theme.VideoSection.prototype = _.assignIn({}, theme.VideoSection.prototype, {
   }
 });
 
+theme.heros = {};
+
+theme.HeroSection = (function() {
+  function HeroSection(container) {
+    var $container = (this.$container = $(container));
+    var sectionId = $container.attr('data-section-id');
+    var hero = '#Hero-' + sectionId;
+    theme.heros[hero] = new theme.Hero(hero, sectionId);
+  }
+
+  return HeroSection;
+})();
+
 
 $(document).ready(function() {
   var sections = new theme.Sections();
@@ -3805,6 +3916,7 @@ $(document).ready(function() {
   sections.register('slideshow-section', theme.SlideshowSection);
   sections.register('video-section', theme.VideoSection);
   sections.register('quotes', theme.Quotes);
+  sections.register('hero-section', theme.HeroSection);
 });
 
 theme.init = function() {

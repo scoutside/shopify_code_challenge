@@ -142,12 +142,12 @@
       "remove": "削除",
       "subtotal": "小計",
       "savings": "節約",
-      "taxes_and_shipping_at_checkout": "税と送料はチェックアウト時に計算されます",
-      "taxes_and_shipping_policy_at_checkout_html": "税と<a href=\"{{ link }}\">送料<\/a>はチェックアウト時に計算されます",
-      "taxes_included_but_shipping_at_checkout": "税込みで配送料はチェックアウト時に計算されます。",
-      "taxes_included_and_shipping_policy_html": "税込み。<a href=\"{{ link }}\">送料<\/a>はチェックアウト時に計算されます。",
+      "taxes_and_shipping_at_checkout": "税と配送料は購入手続き時に計算されます",
+      "taxes_and_shipping_policy_at_checkout_html": "税と<a href=\"{{ link }}\">配送料<\/a>は購入手続き時に計算されます",
+      "taxes_included_but_shipping_at_checkout": "税込みで配送料は購入手続き時に計算されます。",
+      "taxes_included_and_shipping_policy_html": "税込み。<a href=\"{{ link }}\">配送料<\/a>は購入手続き時に計算されます。",
       "update": "アップデート",
-      "checkout": "チェックアウト",
+      "checkout": "ご購入手続きへ",
       "empty": "カート内に商品がありません。",
       "cookies_required": "カートを使うためにCookieを有効にする",
       "edit": "編集",
@@ -341,7 +341,7 @@
       "vendor": "ベンダー",
       "quantity_minimum_message": "数量は1以上でなければなりません",
       "include_taxes": "税込み。",
-      "shipping_policy_html": "チェックアウト時に計算された<a href=\"{{ link }}\">送料<\/a>"
+      "shipping_policy_html": "<a href=\"{{ link }}\">配送料<\/a>は購入手続き時に計算されます。"
     }
   },
   "gift_cards": {
@@ -361,6 +361,6 @@
     }
   },
   "date_formats": {
-    "month_day_year": "%Y年%b%d日"
+    "month_day_year": "%Y年%-m月%-d日"
   }
 }

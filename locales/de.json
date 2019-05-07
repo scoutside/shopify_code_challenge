@@ -5,8 +5,8 @@
       "close_modal": "Schließen",
       "link_messages": {
         "new_window": "Öffnet ein neues Fenster.",
-        "external": "Öffnet externe Webseite.",
-        "new_window_and_external": "Öffnet externe Webseite in einem neuen Fenster."
+        "external": "Öffnet externe Website.",
+        "new_window_and_external": "Öffnet externe Website in einem neuen Fenster."
       },
       "refresh_page": "Wenn Sie eine Auswahl auswählen, wird eine vollständige Seite aktualisiert",
       "selection_help": "drücken Sie die Leertaste und dann die Pfeiltasten, um eine Auswahl zu treffen"
@@ -97,7 +97,7 @@
       "address_error": "Kann die Adresse nicht finden",
       "address_no_results": "Keine Ergebnisse für diese Adresse",
       "address_query_limit_html": "Sie haben die Google- API-Nutzungsgrenze überschritten. Betrachten wir zu einem <a href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\">Premium-Paket<\/a> zu aktualisieren.",
-      "auth_error_html": "Es gab ein Problem bei Google Maps Konto zu authentifizieren.",
+      "auth_error_html": "Es gab ein Problem bei der Authentifizierung Ihres Google Maps-Kontos.",
       "section_heading": "Lage"
     },
     "video": {
@@ -193,17 +193,17 @@
   },
   "customer": {
     "account": {
-      "title": "Mein Account",
-      "details": "Account-Details",
+      "title": "Mein Konto",
+      "details": "Kontodetails",
       "view_addresses": "Adressen ansehen",
-      "return": "Zurück zu Account-Details"
+      "return": "Zurück zu Kontodetails"
     },
     "activate_account": {
-      "title": "Account aktivieren",
-      "subtext": "Erstellen Sie ein Passwort, um Ihren Account zu aktiveren.",
+      "title": "Konto aktivieren",
+      "subtext": "Erstellen Sie ein Passwort, um Ihr Konto zu aktiveren.",
       "password": "Passwort",
       "password_confirm": "Passwort bestätigen",
-      "submit": "Account aktivieren",
+      "submit": "Konto aktivieren",
       "cancel": "Einladung ablehnen"
     },
     "addresses": {
@@ -278,14 +278,14 @@
       "success": "Wir haben Ihnen eine E-Mail mit einem Link zum Aktualisieren des Passworts geschickt."
     },
     "reset_password": {
-      "title": "Account-Passwort zurücksetzen",
+      "title": "Passwort für Konto zurücksetzen",
       "subtext": "Geben Sie ein neues Passwort für {{ email }} ein",
       "password": "Passwort",
       "password_confirm": "Passwort bestätigen",
       "submit": "Passwort zurücksetzen"
     },
     "register": {
-      "title": "Account erstellen",
+      "title": "Konto erstellen",
       "first_name": "Vorname",
       "last_name": "Nachname",
       "email": "E-Mail",
@@ -319,10 +319,10 @@
       }
     },
     "customer": {
-      "account": "Account",
+      "account": "Konto",
       "log_out": "Ausloggen",
       "log_in": "Einloggen",
-      "create_account": "Account erstellen"
+      "create_account": "Konto erstellen"
     },
     "footer": {
       "social_platform": "{{ name }} auf {{ platform }}"
@@ -361,6 +361,6 @@
     }
   },
   "date_formats": {
-    "month_day_year": "%d. %B. %Y"
+    "month_day_year": "%-d. %b %Y"
   }
 }
