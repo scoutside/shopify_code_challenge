@@ -1,0 +1,82 @@
+{% schema %}
+{
+    "name": "Product Picker",
+    "settings": [
+        {
+            "id" : "text-box",
+            "type" : "text",
+            "label" : "Title of Section",
+            "default" : "Featured Products"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "slide",
+            "name": "Slide",
+            "settings": [
+            {
+                "id": "product",
+                "type": "product",
+                "label": "Featured Products"
+            }
+            ]
+        }
+    ]
+}
+{% endschema %}
+
+{% for block in section.blocks %}
+    {% assign product = all_products[block.settings.product] %}
+    <div class="products">
+        <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: 'master' }}">
+            {{ product.title }}
+            {{ product.price }}
+        </a>
+        <button onclick="addToCart({{ product.variants[0].id }})">Add To Cart</button>
+    </div>
+
+{% endfor %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<script>
+function addToCart(str) {
+            axios.post('/cart/add.js', {
+            "quantity": 1,
+            "id": str,
+            properties: {
+              shipping_interval_frequency: 180,
+              'orderType': 'monthly',
+              shipping_interval_unit_type: 'day'            }
+          })
+            .then(function(response){
+                if(response.data.properties.shipping_interval_frequency){
+                    var hasSub = true;
+                } else {
+                    var hasSub = false;
+                }
+
+                if (hasSub) {
+                    function get_cookie(name) {
+                    return (document.cookie.match('(^|; )' + name + '=([^;]*)') || 0)[2]
+                    }
+                    do {
+                    var token = get_cookie('cart');
+                    }
+                    while (token == undefined);
+
+                    var myshopify_domain = 'code-challenge.myshopify.com'
+                    try {
+                    var ga_linker = ga.getAll()[0].get('linkerParam')
+                    } catch (err) {
+                    var ga_linker = ''
+                    }
+                    var checkout_url = "https://checkout.rechargeapps.com/r/checkout?myshopify_domain=" + myshopify_domain + "&cart_token=" + token + "&" + ga_linker;
+                    window.location = checkout_url;
+                } else {
+                    window.location.href = "/checkout"
+                }
+            })
+  
+}
+</script>

@@ -1,0 +1,19 @@
+{% raw %}
+<div id="app">
+    <p>{{ product.title }}</p>
+    <img v-bind:src="product.images[0].src" alt="">
+    <p>{{ product.variants[0].price }}</p>
+    <button v-on:click="addToCart(product.variants[0].id)">Add To Cart</button>
+</div>
+{% endraw %}
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<script src="{{ 'vue.js' | asset_url }}" defer="defer"></script>
+
+
+<style>
+#app {
+    text-align: center;
+}
+</style>
