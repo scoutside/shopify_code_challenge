@@ -1,0 +1,6 @@
+development:
+  password: 88e2ea9e05e7eab33fd62305ae0fd2ea
+  theme_id: '37133844526'
+  store: code-challenge.myshopify.com
+  ignore_files:
+    - config/settings_data.json
